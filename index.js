@@ -44,8 +44,8 @@ class Collection {
     delete this.dataCache[docId]; // Remove from cache
   }
 
-  _generateDocId() {
-    return `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  _generateDocId(doc) {
+    return doc.id || `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
   }
 
   startDuplicateCheck() {
@@ -59,7 +59,7 @@ class Collection {
       this.removeDuplicates();
       return doc;
     }
-    const docId = this._generateDocId();
+    const docId = this._generateDocId(doc);
     const newDoc = { ...doc, id: docId };
     this._saveDocument(newDoc);
     return newDoc;

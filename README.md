@@ -1,14 +1,14 @@
 # SimpleDB Example
 
-Contoh penggunaan **@zidnigz/fs-db**, sebuah database ringan berbasis file untuk Node.js yang menggunakan sintaks query mirip SQL.
+Example usage of **@zidnigz/fs-db**, a lightweight file-based database for Node.js that supports SQL-like query syntax.
 
-Package ini memungkinkan kamu melakukan operasi **INSERT, SELECT, UPDATE, agregasi, filtering, sorting, dan pagination** tanpa perlu database server seperti MySQL atau PostgreSQL.
+This package allows operations such as **INSERT, SELECT, UPDATE, aggregation, filtering, sorting, and pagination** without requiring a database server like MySQL or PostgreSQL.
 
 ---
 
-# Instalasi
+# Installation
 
-Install package menggunakan **npm**:
+Install the package using **npm**:
 
 ```bash
 npm install @zidnigz/fs-db
@@ -16,24 +16,24 @@ npm install @zidnigz/fs-db
 
 ---
 
-# Inisialisasi Database
+# Database Initialization
 
-Import package dan buat instance database.
+Import the package and create a database instance.
 
 ```javascript
 const SimpleDB = require('@zidnigz/fs-db');
 const db = new SimpleDB('./my_database');
 ```
 
-Parameter `./my_database` adalah folder tempat database disimpan. Jika folder belum ada, biasanya akan dibuat otomatis.
+The `./my_database` parameter specifies the folder where the database files are stored. If the folder does not exist, it will be created automatically.
 
 ---
 
-# Contoh Penggunaan
+# Usage Examples
 
 ## 1. Multiple Insert
 
-Menambahkan beberapa data sekaligus ke tabel `users`.
+Insert multiple records into the `users` table.
 
 ```javascript
 db.query(
@@ -45,7 +45,7 @@ db.query(
 
 ## 2. Complex Select
 
-Query dengan kondisi, alias kolom, pengurutan, dan pembatasan jumlah data.
+Query with conditions, column aliases, sorting, and pagination.
 
 ```javascript
 const users = db.query(
@@ -55,10 +55,10 @@ const users = db.query(
 console.log(users);
 ```
 
-Fitur yang digunakan pada query ini:
+Query features used:
 
 * `SELECT`
-* `AS` (alias kolom)
+* `AS` (column alias)
 * `WHERE`
 * `OR`
 * `ORDER BY`
@@ -67,9 +67,9 @@ Fitur yang digunakan pada query ini:
 
 ---
 
-## 3. Agregasi Data
+## 3. Data Aggregation
 
-Menghitung jumlah user dan rata-rata umur.
+Calculate the total number of users and the average age.
 
 ```javascript
 const stats = db.query(
@@ -79,16 +79,16 @@ const stats = db.query(
 console.log(stats);
 ```
 
-Fungsi agregasi yang tersedia:
+Available aggregation functions:
 
 * `COUNT()`
 * `AVG()`
 
 ---
 
-## 4. Update Data dengan Kondisi Kompleks
+## 4. Conditional Update
 
-Memperbarui data berdasarkan kondisi tertentu.
+Update records based on specific conditions.
 
 ```javascript
 db.query(
@@ -96,7 +96,7 @@ db.query(
 );
 ```
 
-Fitur yang digunakan:
+Query features used:
 
 * `UPDATE`
 * `SET`
@@ -106,7 +106,7 @@ Fitur yang digunakan:
 
 ---
 
-# Contoh Output
+# Example Output
 
 ```javascript
 [
@@ -122,23 +122,23 @@ Fitur yang digunakan:
 
 ---
 
-# Fitur Utama
+# Main Features
 
-* Database berbasis **file system**
-* Query menggunakan **SQL-like syntax**
-* Mendukung operasi dasar database
-* Tidak membutuhkan server database
-* Mudah digunakan untuk **project kecil, bot, atau prototype**
+* File system based database
+* SQL-like query syntax
+* Supports common database operations
+* No database server required
+* Suitable for small projects, bots, or prototypes
 
 ---
 
-# Contoh Penggunaan Lengkap
+# Full Example
 
 ```javascript
 const SimpleDB = require('@zidnigz/fs-db');
 const db = new SimpleDB('./my_database');
 
-// Insert multiple data
+// Insert multiple records
 db.query("INSERT INTO users (name, age, role) VALUES ('Alice', 25, 'admin'), ('Bob', 19, 'user'), ('Charlie', 30, 'user')");
 
 // Select data
@@ -149,7 +149,7 @@ console.log(users);
 const stats = db.query("SELECT COUNT(*) AS total_user, AVG(age) AS rata_umur FROM users WHERE role != 'admin'");
 console.log(stats);
 
-// Update data
+// Update records
 db.query("UPDATE users SET role = 'superadmin' WHERE name LIKE '%Ali%' AND age > 20");
 ```
 
